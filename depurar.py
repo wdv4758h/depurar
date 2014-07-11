@@ -1,7 +1,6 @@
 import functools
 
-if 'DEBUG' not in globals():
-    DEBUG = True
+DEBUG = True
 
 def printc(func):
     if not DEBUG:
