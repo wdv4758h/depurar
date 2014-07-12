@@ -42,6 +42,40 @@ fib(5) => 5
 example 2:
 
 ```python
+# lru_cache can be used in Python 3.2+
+from functools import lru_cache
+from depurar import printc
+
+@printc
+@lru_cache(maxsize=32)
+def fib(num):
+    if num <= 2:
+        return 1
+    return fib(num-1) + fib(num-2)
+```
+
+result 2:
+
+```
+fib(5)
+| fib(4)
+| | fib(3)
+| | | fib(2)
+| | | fib(2) => 1
+| | | fib(1)
+| | | fib(1) => 1
+| | fib(3) => 2
+| | fib(2)
+| | fib(2) => 1
+| fib(4) => 3
+| fib(3)
+| fib(3) => 2
+fib(5) => 5
+```
+
+example 3:
+
+```python
 from depurar import printc
 
 @printc
@@ -62,7 +96,7 @@ def func2(x, y):
 func2(2, 3)
 ```
 
-result 2:
+result 3:
 
 ```python
 func2(2, 3)
@@ -75,7 +109,7 @@ func2(2, 3)
 func2(2, 3) => 3.0
 ```
 
-example 3:
+example 4:
 
 ```python
 from depurar import printc
@@ -98,7 +132,7 @@ def func2(x, y):
 func2(2, 3)
 ```
 
-result 3:
+result 4:
 
 ```python
 func2(2, 3)
