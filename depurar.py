@@ -1,6 +1,20 @@
 import functools
+import time
 
 DEBUG = True
+
+def get_time(func):
+    if not DEBUG:
+        return func
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        t = time.time()
+        data = func(*args, **kwargs)
+        print(time.time() - t)
+        return data
+
+    return wrapper
 
 def printc(func):
     if not DEBUG:
